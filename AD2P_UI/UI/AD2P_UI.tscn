@@ -27,8 +27,8 @@ window_title = "AD2P Scan"
 mode_overrides_title = false
 mode = 0
 access = 2
-current_dir = "/Godot/AD2P-UI"
-current_path = "/Godot/AD2P-UI/"
+current_dir = "/chunk/Documents/GitHub/AD2P-UI/AD2P_UI"
+current_path = "/chunk/Documents/GitHub/AD2P-UI/AD2P_UI/"
 __meta__ = {
 "_edit_use_anchors_": false,
 "_editor_description_": ""

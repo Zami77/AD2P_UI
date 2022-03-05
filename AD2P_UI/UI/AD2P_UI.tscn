@@ -1,0 +1,70 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://ScanButton.gd" type="Script" id=1]
+[ext_resource path="res://UI/AD2P_Control.gd" type="Script" id=2]
+
+[node name="AD2P_UI" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BG" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.254902, 0.286275, 0.294118, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="FileDialog" type="FileDialog" parent="."]
+margin_left = 282.0
+margin_top = 101.0
+margin_right = 767.0
+margin_bottom = 405.0
+window_title = "AD2P Scan"
+mode_overrides_title = false
+mode = 0
+access = 2
+current_dir = "/Godot/AD2P-UI"
+current_path = "/Godot/AD2P-UI/"
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": ""
+}
+
+[node name="ProjectTitle" type="Label" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -20.0
+margin_top = 40.0
+margin_right = 20.0
+margin_bottom = 54.0
+text = "AD-2P"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ScanButton" type="Button" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -34.0
+margin_top = -10.0
+margin_right = 34.0
+margin_bottom = 10.0
+text = "Scan File"
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AD2P_Control" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+script = ExtResource( 2 )
+
+[connection signal="file_selected" from="FileDialog" to="AD2P_Control" method="_on_FileDialog_file_selected"]
+[connection signal="pressed" from="ScanButton" to="ScanButton" method="_on_ScanButton_pressed"]

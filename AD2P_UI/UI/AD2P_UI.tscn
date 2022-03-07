@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://ScanButton.gd" type="Script" id=1]
-[ext_resource path="res://UI/AD2P_Control.gd" type="Script" id=2]
+[ext_resource path="res://UI/ScanButton.gd" type="Script" id=1]
+[ext_resource path="res://UI/PostAd2pScan.gd" type="Script" id=2]
+[ext_resource path="res://UI/GetValidFiles.gd" type="Script" id=3]
+[ext_resource path="res://UI/ValidFilesDialog.gd" type="Script" id=4]
 
 [node name="AD2P_UI" type="Control"]
 anchor_right = 1.0
@@ -13,7 +15,7 @@ __meta__ = {
 [node name="BG" type="ColorRect" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-color = Color( 0.254902, 0.286275, 0.294118, 1 )
+color = Color( 0.341176, 0.341176, 0.341176, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -46,25 +48,59 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="GetValidFiles" type="HTTPRequest" parent="."]
+script = ExtResource( 3 )
+
+[node name="ValidFileButton" type="Button" parent="."]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -76.5
+margin_top = -483.0
+margin_right = 76.5
+margin_bottom = -463.0
+text = "Check Valid File Types"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PostAd2pScan" type="HTTPRequest" parent="."]
+script = ExtResource( 2 )
+
 [node name="ScanButton" type="Button" parent="."]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -34.0
-margin_top = -10.0
-margin_right = 34.0
-margin_bottom = 10.0
-text = "Scan File"
+margin_left = -76.5
+margin_top = -225.0
+margin_right = 76.5
+margin_bottom = -205.0
+text = "AD-2P Scan File"
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="AD2P_Control" type="Control" parent="."]
-margin_right = 40.0
-margin_bottom = 40.0
-script = ExtResource( 2 )
+[node name="ValidFilesDialog" type="AcceptDialog" parent="."]
+visible = true
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -130.5
+margin_top = -63.0
+margin_right = 130.5
+margin_bottom = 63.0
+window_title = "AD-2P Valid File Types"
+dialog_autowrap = true
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[connection signal="file_selected" from="FileDialog" to="AD2P_Control" method="_on_FileDialog_file_selected"]
+[connection signal="file_selected" from="FileDialog" to="PostAd2pScan" method="_on_FileDialog_file_selected"]
+[connection signal="got_valid_files" from="GetValidFiles" to="ValidFilesDialog" method="_on_GetValidFiles_got_valid_files"]
+[connection signal="pressed" from="ValidFileButton" to="GetValidFiles" method="_on_ValidFileButton_pressed"]
 [connection signal="pressed" from="ScanButton" to="ScanButton" method="_on_ScanButton_pressed"]

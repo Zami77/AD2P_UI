@@ -11,7 +11,12 @@ func post_ad2p_scan(filepath: String):
 	var file = File.new()
 	file.open(filepath, File.READ_WRITE)
 	var file_text = file.get_as_text()
-	var resp_code = PostAd2pScan.request(AD2PConstants.AD2P_BASE_URI + AD2PConstants.AD2P_POST_AD2P_SCAN, [], true, HTTPClient.METHOD_POST, file_text)
+	file.close()
+	var req_body = {
+		"filename": filepath,
+		"file_content": file_text
+	}
+	var resp_code = PostAd2pScan.request(AD2PConstants.AD2P_BASE_URI_LOCALHOST + AD2PConstants.AD2P_POST_AD2P_SCAN, [], true, HTTPClient.METHOD_POST, String(req_body))
 	return resp_code
 
 func _on_request_completed(_result, response_code, _headers, body):
